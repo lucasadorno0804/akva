@@ -16,22 +16,45 @@
 <body>
     <header class="glass fixed-nav">
         <div class="container nav-content">
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <img src="akva.svg" alt="AKVAPromo" class="logo-img">
                 <span class="logo-text">AKVA<span>Promo</span></span>
             </a>
 
             <nav class="desktop-nav">
                 <a href="#" class="active">Home</a>
-                <a href="#">Ofertas</a>
-                <a href="#">Games</a>
-                <a href="#">Hardware</a>
+                <a href="#deals-grid">Ofertas</a>
+                <a href="#deals-grid">Games</a>
+                <a href="#deals-grid">Hardware</a>
                 <a href="#">Cupons</a>
             </nav>
 
             <div class="nav-actions">
                 <a href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
-                    class="btn btn-primary btn-sm">Canal no WhatsApp</a>
+                    class="btn btn-primary btn-sm btn-whatsapp-header">
+                    <span class="btn-text-full">Canal no WhatsApp</span>
+                    <span class="btn-text-short">WhatsApp</span>
+                </a>
+                <button class="mobile-menu-btn" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation (Touch-First) -->
+        <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+            <nav class="mobile-nav-links">
+                <a href="#" class="mobile-nav-item active">Home</a>
+                <a href="#deals-grid" class="mobile-nav-item">⚡ Melhores Ofertas</a>
+                <a href="#deals-grid" class="mobile-nav-item">🎮 Games & Consoles</a>
+                <a href="#deals-grid" class="mobile-nav-item">💻 Hardware & GPUs</a>
+                <a href="#" class="mobile-nav-item">🏷️ Cupons de Desconto</a>
+            </nav>
+            <div class="mobile-drawer-cta">
+                <a href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                    class="btn btn-primary w-full">Entrar no Canal do WhatsApp</a>
             </div>
         </div>
     </header>

@@ -124,4 +124,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchBtn) {
         searchBtn.addEventListener('click', handleSearch);
     }
+
+    // 7. Mobile Drawer Navigation Toggle (Touch-First)
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileDrawer = document.querySelector('.mobile-drawer');
+
+    if (mobileMenuBtn && mobileDrawer) {
+        const toggleDrawer = () => {
+            const isOpen = mobileDrawer.classList.toggle('open');
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            mobileDrawer.setAttribute('aria-hidden', !isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        };
+
+        mobileMenuBtn.addEventListener('click', toggleDrawer);
+
+        // Close drawer when a link is tapped
+        mobileDrawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.remove('open');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileDrawer.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            });
+        });
+    }
 });
