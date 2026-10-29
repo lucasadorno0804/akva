@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKVAPromo - Liquid Glass Edition</title>
+    <meta name="description"
+        content="Descontos verificados em Games, Hardware e Smartphones. Economia real todos os dias com estética Liquid Glass.">
+
+    <link rel="stylesheet" href="assets/liquid-glass.css">
+    <link rel="icon" type="image/svg+xml" href="akva.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <!-- Ambient 3D Sculptural Waves Background (Liquid Glass Depth) -->
+    <div class="liquid-canvas-bg" aria-hidden="true">
+        <div class="liquid-ribbon-mesh"></div>
+    </div>
+
+    <!-- Fixed Floating Liquid Navbar -->
+    <header class="fixed-nav">
+        <div class="container nav-content">
+            <a href="index-liquid.html" class="logo">
+                <img src="akva.svg" alt="AKVAPromo" class="logo-img">
+                <span class="logo-text">AKVA<span>Promo</span></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#deals-grid">Ofertas</a>
+                <a href="#deals-grid">Games</a>
+                <a href="#deals-grid">Hardware</a>
+                <a href="#">Cupons</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                    class="btn btn-primary btn-sm">Canal no WhatsApp</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="glow-spot" style="top: -100px; left: -100px;"></div>
+            <div class="glow-spot" style="bottom: 100px; right: -100px;"></div>
+
+            <div class="container hero-content animate-fade-up">
+                <div class="badge-premium">Economia Verificada 🔥</div>
+                <h1 class="text-gradient">Onde o Hardware Encontra o <br><span class="text-primary">Menor Preço.</span></h1>
+                <p class="hero-desc">Curadoria diária das melhores ofertas em tecnologia, games e cultura geek.
+                    <br>Economize até 80% com descontos testados um a um.
+                </p>
+
+                <!-- Liquid Frosted Search Capsule -->
+                <div class="hero-search liquid-glass">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                    <input type="text" placeholder="Qual sua próxima conquista? (ex: RTX 4070, PS5...)">
+                    <button class="btn btn-primary">Buscar</button>
+                </div>
+
+                <div class="hero-tags">
+                    <span>Populares:</span>
+                    <a href="#deals-grid">#RTX4060</a>
+                    <a href="#deals-grid">#PlayStation</a>
+                    <a href="#deals-grid">#iPhone15</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Deals Section (Liquid Glass Product Cards) -->
+        <section class="top-deals">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="text-gradient">⚡ Melhores do Dia</h2>
+                        <p>Ofertas selecionadas a dedo pela nossa equipe.</p>
+                    </div>
+                    <a href="#" class="btn btn-outline">Ver Tudo</a>
+                </div>
+
+                <div class="grid grid-cols-4" id="deals-grid">
+                    <!-- Product Card 1: PS5 Slim -->
+                    <article class="card liquid-glass animate-fade-up" style="animation-delay: 0.1s;">
+                        <div class="card-image">
+                            <img src="./assets/img/play_5_astrobot_ft0fs28ce5.webp" alt="PS5 Slim">
+                            <span class="discount-badge">-19%</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="product-title">PlayStation®5 Slim Digital + Astro Bot + Gran Turismo 7</h3>
+                            <div class="price-box">
+                                <span class="old-price">R$ 4.599,90</span>
+                                <span class="current-price">R$ 3.719,07</span>
+                            </div>
+                            <div class="scarcity-bar">
+                                <div class="bar-fill" style="width: 85%;"></div>
+                                <span class="bar-text">85% resgatado</span>
+                            </div>
+                            <a href="https://amzn.to/4vyqn2X" target="_blank"
+                                class="btn btn-primary w-full">Aproveitar</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 2: Monitor Gamer Curvo -->
+                    <article class="card liquid-glass animate-fade-up" style="animation-delay: 0.2s;">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf" alt="Gamer Setup">
+                            <span class="discount-badge">-40%</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="product-title">Monitor Gamer Curvo 34" 165Hz QuadHD</h3>
+                            <div class="price-box">
+                                <span class="old-price">R$ 3.200,00</span>
+                                <span class="current-price">R$ 1.890,00</span>
+                            </div>
+                            <div class="scarcity-bar">
+                                <div class="bar-fill" style="width: 45%;"></div>
+                                <span class="bar-text">Oferta Premium</span>
+                            </div>
+                            <a href="#" class="btn btn-primary w-full">Aproveitar</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 3: Logitech G Pro X -->
+                    <article class="card liquid-glass animate-fade-up" style="animation-delay: 0.3s;">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e" alt="Gaming Mouse">
+                            <span class="discount-badge">-25%</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="product-title">Logitech G Pro X Superlight Wireless</h3>
+                            <div class="price-box">
+                                <span class="old-price">R$ 999,00</span>
+                                <span class="current-price">R$ 749,00</span>
+                            </div>
+                            <div class="scarcity-bar">
+                                <div class="bar-fill" style="width: 20%;"></div>
+                                <span class="bar-text">Poucas unidades</span>
+                            </div>
+                            <a href="#" class="btn btn-primary w-full">Aproveitar</a>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 4: RTX 4070 Super -->
+                    <article class="card liquid-glass animate-fade-up" style="animation-delay: 0.4s;">
+                        <div class="card-image">
+                            <img src="./assets/img/rtx4070.png" alt="RTX 4070 Super">
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="product-title">NVIDIA GeForce RTX 4070 Super 12GB</h3>
+                            <div class="price-box">
+                                <span class="old-price">R$ 4.800,00</span>
+                                <span class="current-price">R$ 4.090,00</span>
+                            </div>
+                            <div class="scarcity-bar">
+                                <div class="bar-fill" style="width: 90%;"></div>
+                                <span class="bar-text">Quase esgotado!</span>
+                            </div>
+                            <a href="#" class="btn btn-primary w-full">Aproveitar</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Liquid Glass Promo Banner -->
+        <section class="container">
+            <div class="banner-group liquid-glass">
+                <div class="banner-promo">
+                    <h2 class="text-gradient">Não perca o rastro do desconto!</h2>
+                    <p>Entre no nosso canal e receba em primeira mão.</p>
+                    <a href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                        class="btn btn-primary">Acompanhe no Canal do WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Liquid Glass Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <img src="akva.svg" alt="AKVAPromo" class="logo-img">
+                    <span class="logo-text">AKVA<span>Promo</span></span>
+                </div>
+                <p>O maior hub de ofertas curadas do Brasil. <br>Economia inteligente para quem ama tecnologia.</p>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Categorias</h4>
+                    <a href="#">Hardware</a>
+                    <a href="#">Periféricos</a>
+                    <a href="#">Setups</a>
+                </div>
+                <div class="link-group">
+                    <h4>Suporte</h4>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos</a>
+                    <a href="#">Contato</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 AKVAPromo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Decorative Ambient Glow Spots -->
+    <div class="glow-spot spot-1" style="top: 0; right: -200px;"></div>
+    <div class="glow-spot spot-2" style="top: 1000px; left: -200px;"></div>
+    <div class="glow-spot spot-3" style="bottom: 0; right: 0;"></div>
+
+    <!-- Floating Switcher back to Original Dark Mode -->
+    <a href="index.html" class="floating-theme-switch" title="Alternar para a versão original">
+        <span class="switch-dot"></span>
+        <span>Ver Versão Original</span>
+    </a>
+
+    <script src="assets/liquid-main.js"></script>
+</body>
+
+</html>

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-:root {
-    /* 0. Custom Scrollbar */
-}
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -195,18 +193,18 @@ h1, h2, h3, h4 {
     text-decoration: none;
 }
 
-.logo-box {
-    width: 40px;
-    height: 40px;
-    background: var(--primary);
-    color: var(--bg-main);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 24px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--primary-glow);
+
+.logo-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 12px rgba(255, 43, 43, 0.35));
+    transition: transform 0.3s var(--transition);
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.08);
 }
 
 .logo-text {
