@@ -9,6 +9,7 @@
         content="Descontos verificados em Games, Hardware e Smartphones. Economia real todos os dias com estética Liquid Glass.">
 
     <link rel="stylesheet" href="assets/liquid-glass.css">
+    <link rel="stylesheet" href="assets/style-switcher.css">
     <link rel="icon" type="image/svg+xml" href="akva.svg">
     <link rel="alternate icon" type="image/png" href="favicon.png">
 </head>
@@ -246,11 +247,13 @@
     <div class="glow-spot spot-2" style="top: 1000px; left: -200px;"></div>
     <div class="glow-spot spot-3" style="bottom: 0; right: 0;"></div>
 
-    <!-- Floating Switcher back to Original Dark Mode -->
-    <a href="index.html" class="floating-theme-switch" title="Alternar para a versão original">
-        <span class="switch-dot"></span>
-        <span>Ver Versão Original</span>
-    </a>
+    <!-- Seletor entre as versões do protótipo -->
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <span class="style-switcher-label">Estilo</span>
+        <a href="index.html">Original</a>
+        <a href="index-liquid.html" aria-current="page">Liquid</a>
+        <a href="index-apple.html">Apple</a>
+    </nav>
 
     <script src="assets/liquid-main.js"></script>
 </body>

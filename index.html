@@ -9,6 +9,7 @@
         content="Descontos verificados em Games, Hardware e Smartphones. Economia real todos os dias.">
 
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style-switcher.css">
     <link rel="icon" type="image/svg+xml" href="akva.svg">
     <link rel="alternate icon" type="image/png" href="favicon.png">
 </head>
@@ -234,11 +235,13 @@
     <div class="glow-spot spot-2" style="top: 1000px; left: -200px;"></div>
     <div class="glow-spot spot-3" style="bottom: 0; right: 0;"></div>
 
-    <!-- Floating Switcher to Liquid Glass Edition -->
-    <a href="index-liquid.html" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 9999px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-        <span style="width: 8px; height: 8px; border-radius: 50%; background: #FF2B2B; box-shadow: 0 0 8px #FF2B2B;"></span>
-        <span>Ver Versão Liquid Glass 💧</span>
-    </a>
+    <!-- Seletor entre as versões do protótipo -->
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <span class="style-switcher-label">Estilo</span>
+        <a href="index.html" aria-current="page">Original</a>
+        <a href="index-liquid.html">Liquid</a>
+        <a href="index-apple.html">Apple</a>
+    </nav>
 
     <script src="assets/main.js"></script>
 </body>

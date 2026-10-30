@@ -1,0 +1,12 @@
+# Snapshots de testes do Playwright MCP
+.playwright-mcp/
+
+# Arte-fonte em alta resolução (não usada pelo site)
+_source/
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
