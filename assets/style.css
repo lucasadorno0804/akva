@@ -917,3 +917,114 @@ footer {
         padding: 14px;
     }
 }
+
+/* ==========================================================================
+   Temas
+   O <html> recebe data-theme="light" ou "dark" (assets/theme.js): segue o
+   sistema de quem visita ou a escolha feita no seletor do protótipo.
+   ========================================================================== */
+:root {
+    color-scheme: dark;
+    --primary-ink: var(--primary);
+    --nav-scrolled-bg: rgba(6, 6, 6, 0.8);
+    --nav-scrolled-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Cabeçalho: transparente no topo, material ao rolar */
+.fixed-nav.glass {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.fixed-nav.glass.is-scrolled {
+    background: var(--nav-scrolled-bg);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-bottom-color: var(--nav-scrolled-border);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg-main: #F5F5F7;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FFFFFF;
+    --primary-glow: rgba(255, 43, 43, 0.22);
+    /* Vermelho de texto um pouco mais escuro: #FF2B2B sobre claro não passa no contraste AA */
+    --primary-ink: #D91A1A;
+    --text-main: #1D1D1F;
+    --text-muted: #515154;
+    --text-dim: #6E6E73;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.16);
+    --glass: rgba(255, 255, 255, 0.72);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+    --nav-scrolled-bg: rgba(245, 245, 247, 0.8);
+    --nav-scrolled-border: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"]::-webkit-scrollbar-track,
+:root[data-theme="light"] ::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+:root[data-theme="light"]::-webkit-scrollbar-thumb,
+:root[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: var(--bg-main);
+}
+
+:root[data-theme="light"]::-webkit-scrollbar-thumb:hover,
+:root[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="light"] .text-gradient {
+    background-image: linear-gradient(135deg, #1D1D1F 0%, rgba(29, 29, 31, 0.72) 100%);
+}
+
+:root[data-theme="light"] :is(.badge-premium, .current-price, .bar-text, .hero-tags a:hover, .link-group a:hover) {
+    color: var(--primary-ink);
+}
+
+:root[data-theme="light"] .card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 28px -14px rgba(0, 0, 0, 0.14);
+}
+
+:root[data-theme="light"] .card:hover {
+    box-shadow: 0 20px 40px rgba(255, 43, 43, 0.14);
+}
+
+:root[data-theme="light"] .card-image {
+    background: #FFFFFF;
+}
+
+:root[data-theme="light"] .scarcity-bar {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme="light"] .hero-search {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] .mobile-menu-btn {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+:root[data-theme="light"] .mobile-drawer {
+    background: rgba(245, 245, 247, 0.97);
+}
+
+:root[data-theme="light"] .mobile-nav-item {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] .mobile-nav-item:active,
+:root[data-theme="light"] .mobile-nav-item.active {
+    background: rgba(255, 43, 43, 0.08);
+    border-color: rgba(255, 43, 43, 0.3);
+    color: var(--primary-ink);
+}

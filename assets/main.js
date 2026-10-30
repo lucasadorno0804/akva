@@ -3,19 +3,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Header Scroll Effect
+    // 1. Header Scroll Effect (as cores ficam no CSS, para funcionar nos dois temas)
     const header = document.querySelector('.fixed-nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.background = 'rgba(6, 6, 6, 0.8)';
-            header.style.backdropFilter = 'blur(20px)';
-            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
-        } else {
-            header.style.background = 'transparent';
-            header.style.backdropFilter = 'none';
-            header.style.borderBottom = 'none';
-        }
-    });
+    const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
 
     // 2. Intersection Observer for Scroll Animations
     const observerOptions = {

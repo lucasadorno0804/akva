@@ -3,22 +3,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Navbar Scroll Blur Elevation
+    // 1. Navbar Scroll Blur Elevation (as cores ficam no CSS, para funcionar nos dois temas)
     const header = document.querySelector('.fixed-nav');
-    window.addEventListener('scroll', () => {
-        if (!header) return;
-        if (window.scrollY > 40) {
-            header.style.background = 'rgba(6, 6, 6, 0.85)';
-            header.style.backdropFilter = 'blur(28px) saturate(190%)';
-            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.12)';
-            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
-        } else {
-            header.style.background = 'rgba(6, 6, 6, 0.65)';
-            header.style.backdropFilter = 'blur(28px) saturate(190%)';
-            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.08)';
-            header.style.boxShadow = 'none';
-        }
-    });
+    const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
 
     // 2. Liquid Parallax for Ambient Mesh & Glow Spots
     let ticking = false;

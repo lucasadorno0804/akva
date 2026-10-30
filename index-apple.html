@@ -7,8 +7,9 @@
     <title>AKVAPromo · Cupons e ofertas testados</title>
     <meta name="description"
         content="Cupons e ofertas da Amazon, do Mercado Livre e do AliExpress, testados um a um antes de chegar até você.">
-    <meta name="theme-color" content="#060606">
-    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#060606" data-dark="#060606" data-light="#ffffff">
+    <meta name="color-scheme" content="light dark">
+    <script src="assets/theme.js"></script>
 
     <meta property="og:title" content="AKVAPromo · Cupons e ofertas testados">
     <meta property="og:description"
@@ -23,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
 
-    <link rel="stylesheet" href="assets/apple.css">
-    <link rel="stylesheet" href="assets/style-switcher.css">
+    <link rel="stylesheet" href="assets/apple.css?v=2">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=2">
 </head>
 
 <body>
@@ -268,10 +269,22 @@
         <a href="index.html">Original</a>
         <a href="index-liquid.html">Liquid</a>
         <a href="index-apple.html" aria-current="page">Apple</a>
+        <span class="style-switcher-divider" aria-hidden="true"></span>
+        <div class="style-switcher-themes" role="group" aria-label="Tema">
+            <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" /></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Tema claro" title="Claro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.75" /><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05" /></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Tema escuro" title="Escuro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z" /></svg>
+            </button>
+        </div>
     </nav>
 
     <script src="assets/apple-data.js"></script>
-    <script src="assets/apple.js"></script>
+    <script src="assets/apple.js?v=2"></script>
 </body>
 
 </html>

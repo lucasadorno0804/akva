@@ -777,6 +777,7 @@
         let returnFocus = null;
         let drag = null;
         let suppressClick = false;
+        let shadowAlpha = 0.5;
 
         const progress = new Spring(0, { precision: 0.0005, onUpdate: render });
 
@@ -821,6 +822,8 @@
             sheet.style.clipPath = '';
             to = frame.getBoundingClientRect();
             sheet.style.setProperty('--notch-y', `${$('.pass-top', sheetPass).offsetHeight}px`);
+            // Sombra mais leve no tema claro (definida no CSS)
+            shadowAlpha = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-shadow')) || 0.5;
         }
 
         function render() {
@@ -842,7 +845,7 @@
                 const ty = (from.top - to.top) * (1 - p);
                 const shown = from.height / s0 + (to.height - from.height / s0) * p;
                 frame.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(${s.toFixed(4)})`;
-                frame.style.filter = `drop-shadow(0 24px 48px rgba(0, 0, 0, ${(0.5 * k).toFixed(3)}))`;
+                frame.style.filter = `drop-shadow(0 24px 48px rgba(0, 0, 0, ${(shadowAlpha * k).toFixed(3)}))`;
                 sheet.style.clipPath = `inset(0 0 ${Math.max(0, to.height - shown).toFixed(2)}px 0 round var(--r-lg))`;
                 closeButton.style.opacity = clamp((p - 0.6) / 0.4, 0, 1).toFixed(3);
                 return;

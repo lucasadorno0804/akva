@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <!-- Versão clara de liquid-waves.svg: mesmas fitas, em vidro prateado sobre fundo claro -->
+  <defs>
+    <linearGradient id="light-bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F8FB" />
+      <stop offset="50%" stop-color="#ECEEF3" />
+      <stop offset="100%" stop-color="#F4F2F4" />
+    </linearGradient>
+
+    <!-- Fita de vidro clara 1 -->
+    <linearGradient id="ribbon-light-1" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="35%" stop-color="#E3E6ED" stop-opacity="0.65" />
+      <stop offset="70%" stop-color="#D1D6E0" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.5" />
+    </linearGradient>
+
+    <!-- Fita de vidro clara 2 -->
+    <linearGradient id="ribbon-light-2" x1="90%" y1="10%" x2="10%" y2="90%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="40%" stop-color="#DADEE7" stop-opacity="0.6" />
+      <stop offset="80%" stop-color="#C7CDD9" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#F1F2F6" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Brilho especular nas bordas -->
+    <linearGradient id="specular-line" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2" />
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="85%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Sombra suave sob as fitas -->
+    <filter id="ribbon-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.11   0 0 0 0 0.12   0 0 0 0 0.19  0 0 0 0.18 0" />
+      <feBlend in="SourceGraphic" in2="blur" mode="normal" />
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#light-bg-grad)" />
+
+  <path d="M-150,-100 C320,60 460,580 -80,820 C-320,940 -120,1280 480,1240 C980,1200 950,840 740,580 C530,320 820,110 1180,40 C1540,-30 1780,220 2150,-80 Z"
+        fill="url(#ribbon-light-1)" filter="url(#ribbon-shadow)" />
+
+  <path d="M380,-180 C820,120 920,640 580,900 C240,1160 680,1320 1200,1260 C1720,1200 1660,780 1440,560 C1220,340 1520,120 1840,30 C2160,-60 2240,120 2300,-140 Z"
+        fill="url(#ribbon-light-2)" filter="url(#ribbon-shadow)" />
+
+  <path d="M-120,520 C340,460 480,820 260,1120 C80,1340 540,1380 980,1320 C1420,1260 1380,940 1160,780 C840,560 1260,340 1580,280 C1900,220 2040,460 2220,580 L2220,1300 L-120,1300 Z"
+        fill="url(#ribbon-light-1)" opacity="0.6" filter="url(#ribbon-shadow)" />
+
+  <path d="M120,30 C460,200 560,560 380,780 C200,990 480,1160 840,1110 C1200,1060 1240,800 1050,610 C860,420 1090,230 1380,140 C1670,50 1910,180 2120,30"
+        stroke="url(#specular-line)" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+  <path d="M-40,320 C270,380 410,740 220,980 C60,1180 340,1280 720,1240"
+        stroke="url(#specular-line)" stroke-width="3" fill="none" stroke-linecap="round" />
+</svg>
