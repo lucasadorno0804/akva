@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>AKVAPromo · Black Friday</title>
+    <meta name="description"
+        content="Contagem regressiva para a Black Friday e as ofertas e cupons que já estão valendo na Amazon, no Mercado Livre e no AliExpress.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#050505" data-dark="#050505" data-light="#ffffff">
+    <script src="assets/theme.js?v=3"></script>
+
+    <link rel="icon" type="image/svg+xml" href="akva.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600..900&display=swap">
+
+    <link rel="stylesheet" href="assets/blackfriday.css?v=1">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=4">
+</head>
+
+<body>
+    <a class="skip-link" href="#cupons">Pular para os cupons</a>
+
+    <header class="topbar">
+        <div class="wrap topbar-inner">
+            <a class="brand" href="index-blackfriday.html" aria-label="AKVAPromo, início">
+                <img src="akva.svg" alt="" width="34" height="34">
+                <span class="wordmark">AKVA<span>Promo</span></span>
+            </a>
+            <span class="event-tag">Black Friday <span id="event-year"></span></span>
+            <a class="btn btn--red" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                rel="noopener">
+                <span class="only-wide">Alertas no WhatsApp</span>
+                <span class="only-narrow">WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="wrap">
+                <p class="hero-kicker" id="hero-kicker">Faltam</p>
+                <h1 class="hero-title" id="hero-title">Black <span>Friday</span></h1>
+                <div class="countdown" role="timer" aria-describedby="hero-sub">
+                    <div class="unit"><span class="unit-n" data-unit="days">00</span><span class="unit-l">dias</span></div>
+                    <div class="unit"><span class="unit-n" data-unit="hours">00</span><span class="unit-l">horas</span></div>
+                    <div class="unit"><span class="unit-n" data-unit="minutes">00</span><span class="unit-l">min</span></div>
+                    <div class="unit"><span class="unit-n" data-unit="seconds">00</span><span class="unit-l">seg</span></div>
+                </div>
+                <p class="hero-sub" id="hero-sub"></p>
+            </div>
+        </section>
+
+        <div class="tape-wrap" aria-hidden="true">
+            <div class="tape">
+                <div class="tape-track" id="tape-track"></div>
+            </div>
+        </div>
+
+        <nav class="wrap filters" id="filters" aria-label="Filtrar por loja"></nav>
+
+        <section class="wrap section" id="cupons" aria-labelledby="coupons-title">
+            <div class="section-head">
+                <h2 class="section-title" id="coupons-title">Cupons que acabam primeiro</h2>
+                <p class="section-sub">Na ordem do fim da validade. O relógio de cada um mostra quanto falta.</p>
+            </div>
+            <ul class="coupons" id="coupons"></ul>
+        </section>
+
+        <section class="wrap section" id="ofertas" aria-labelledby="deals-title">
+            <div class="section-head">
+                <h2 class="section-title" id="deals-title">Maiores descontos</h2>
+                <p class="section-sub">Do maior para o menor, com o preço conferido na loja.</p>
+            </div>
+            <ul class="deals" id="deals"></ul>
+        </section>
+
+        <section class="cta" aria-labelledby="cta-title">
+            <div class="wrap cta-inner">
+                <h2 class="cta-title" id="cta-title">Na Black Friday, cupom bom dura minutos.</h2>
+                <p>Entre no canal do WhatsApp e receba cada cupom assim que ele for testado.</p>
+                <a class="btn btn--red btn--xl" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I"
+                    target="_blank" rel="noopener">Entrar no canal</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="wrap footer">
+        <p>Os relógios contam até o fim da validade informada por cada loja e até a data da Black Friday. Preços e
+            cupons foram conferidos no horário indicado e podem mudar na loja a qualquer momento.</p>
+        <p>Alguns links são de afiliado: a loja nos paga uma comissão e o preço para você não muda. Amazon, Mercado
+            Livre e AliExpress são marcas de seus respectivos titulares. &copy; 2026 AKVAPromo.</p>
+    </footer>
+
+    <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <details class="style-switcher-menu">
+            <summary><span class="style-switcher-label">Estilo</span> <b>Black Friday</b></summary>
+            <div class="style-switcher-list">
+                <a href="index.html">Original</a>
+                <a href="index-liquid.html">Liquid</a>
+                <a href="index-apple.html">Apple</a>
+                <a href="index-encarte.html">Encarte</a>
+                <a href="index-terminal.html">Terminal</a>
+                <a href="index-blackfriday.html" aria-current="page">Black Friday</a>
+                <a href="index-conversa.html">Conversa</a>
+                <a href="index-hud.html">HUD gamer</a>
+                <a href="index-brutalista.html">Brutalista</a>
+            </div>
+        </details>
+        <span class="style-switcher-divider" aria-hidden="true"></span>
+        <div class="style-switcher-themes" role="group" aria-label="Tema">
+            <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" /></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Tema claro" title="Claro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.75" /><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05" /></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Tema escuro" title="Escuro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <script src="assets/akva-data.js"></script>
+    <script src="assets/proto-kit.js?v=1"></script>
+    <script src="assets/blackfriday.js?v=1"></script>
+</body>
+
+</html>

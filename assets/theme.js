@@ -54,6 +54,20 @@
         apply();
     });
     document.addEventListener('DOMContentLoaded', apply);
+
+    // Menu de estilos do protótipo: fecha ao clicar fora ou com Esc
+    document.addEventListener('click', (event) => {
+        document.querySelectorAll('.style-switcher-menu[open]').forEach((menu) => {
+            if (!menu.contains(event.target)) menu.open = false;
+        });
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        document.querySelectorAll('.style-switcher-menu[open]').forEach((menu) => {
+            menu.open = false;
+            menu.querySelector('summary').focus();
+        });
+    });
     document.addEventListener('click', (event) => {
         const button = event.target.closest('[data-theme-option]');
         if (button) choose(button.dataset.themeOption);

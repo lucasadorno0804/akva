@@ -1,5 +1,5 @@
 /**
- * AKVAPromo · protótipo Apple: dados de exemplo.
+ * AKVAPromo · dados de exemplo compartilhados pelos protótipos (Apple, Encarte, Terminal).
  * Cupons, preços e horários são fictícios. As fotos do Unsplash ocupam o lugar
  * das fotos reais dos produtos (que normalmente vêm com fundo branco da loja).
  */

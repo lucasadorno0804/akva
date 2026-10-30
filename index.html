@@ -10,10 +10,10 @@
 
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#060606" data-dark="#060606" data-light="#f5f5f7">
-    <script src="assets/theme.js"></script>
+    <script src="assets/theme.js?v=3"></script>
 
     <link rel="stylesheet" href="assets/style.css?v=2">
-    <link rel="stylesheet" href="assets/style-switcher.css?v=2">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=4">
     <link rel="icon" type="image/svg+xml" href="akva.svg">
     <link rel="alternate icon" type="image/png" href="favicon.png">
 </head>
@@ -241,10 +241,20 @@
 
     <!-- Seletor entre as versões do protótipo -->
     <nav class="style-switcher" aria-label="Versões do protótipo">
-        <span class="style-switcher-label">Estilo</span>
-        <a href="index.html" aria-current="page">Original</a>
-        <a href="index-liquid.html">Liquid</a>
-        <a href="index-apple.html">Apple</a>
+        <details class="style-switcher-menu">
+            <summary><span class="style-switcher-label">Estilo</span> <b>Original</b></summary>
+            <div class="style-switcher-list">
+                <a href="index.html" aria-current="page">Original</a>
+                <a href="index-liquid.html">Liquid</a>
+                <a href="index-apple.html">Apple</a>
+                <a href="index-encarte.html">Encarte</a>
+                <a href="index-terminal.html">Terminal</a>
+                <a href="index-blackfriday.html">Black Friday</a>
+                <a href="index-conversa.html">Conversa</a>
+                <a href="index-hud.html">HUD gamer</a>
+                <a href="index-brutalista.html">Brutalista</a>
+            </div>
+        </details>
         <span class="style-switcher-divider" aria-hidden="true"></span>
         <div class="style-switcher-themes" role="group" aria-label="Tema">
             <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>AKVAPromo · Terminal de preços</title>
+    <meta name="description"
+        content="Ofertas e cupons da Amazon, do Mercado Livre e do AliExpress com histórico de preço de 90 dias.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0a0a0a" data-dark="#0a0a0a" data-light="#f6f6f4">
+    <script src="assets/theme.js?v=3"></script>
+
+    <link rel="icon" type="image/svg+xml" href="akva.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="assets/terminal.css?v=1">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=4">
+</head>
+
+<body>
+    <a class="skip-link" href="#ofertas">Pular para a tabela de ofertas</a>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="index-terminal.html" aria-label="AKVAPromo Terminal, início">
+                <img src="akva.svg" alt="" width="28" height="28">
+                <span class="wordmark">AKVA<span>Promo</span></span>
+                <span class="brand-tag" aria-hidden="true">Terminal</span>
+            </a>
+
+            <form class="cmd" role="search" id="search">
+                <label class="sr-only" for="q">Buscar produto, loja ou cupom</label>
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <circle cx="8.5" cy="8.5" r="6" />
+                    <path d="m13 13 4.5 4.5" />
+                </svg>
+                <input id="q" type="search" placeholder="Buscar produto, loja ou cupom" autocomplete="off"
+                    enterkeyhint="search" spellcheck="false">
+                <kbd aria-hidden="true">/</kbd>
+            </form>
+
+            <time class="clock" id="clock"></time>
+
+            <a class="btn btn--red" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                rel="noopener">
+                <span class="only-wide">Alertas no WhatsApp</span>
+                <span class="only-narrow">WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="indices" id="indices" aria-label="Filtrar por loja"></nav>
+
+    <main class="layout">
+        <h1 class="sr-only">AKVAPromo: terminal de preços e cupons</h1>
+
+        <section class="panel deals-panel" id="ofertas" aria-labelledby="deals-title">
+            <header class="panel-head">
+                <h2 id="deals-title">Ofertas</h2>
+                <p class="panel-meta" id="deals-meta" aria-live="polite"></p>
+            </header>
+            <div class="table-wrap">
+                <table class="grid deals-grid">
+                    <caption class="sr-only">Ofertas com preço atual, desconto e histórico de 90 dias. Selecione
+                        uma oferta para ver o gráfico ao lado.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" data-key="title" aria-sort="none"><button type="button">Produto</button></th>
+                            <th scope="col" class="num" data-key="price" aria-sort="none"><button type="button">Preço</button></th>
+                            <th scope="col" class="num" data-key="off" aria-sort="descending"><button type="button">Desc.</button></th>
+                            <th scope="col" class="num col-low" data-key="low" aria-sort="none"><button type="button">vs. mín. 90d</button></th>
+                            <th scope="col" class="col-spark"><span><span class="only-wide">90 dias</span><span class="only-narrow">90d</span></span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="deals-body"></tbody>
+                </table>
+            </div>
+            <p class="empty" id="deals-empty" hidden>Nenhuma oferta com esse filtro.</p>
+        </section>
+
+        <aside class="panel detail" aria-labelledby="detail-title">
+            <div class="detail-inner" id="detail"></div>
+        </aside>
+
+        <section class="panel coupons-panel" id="cupons" aria-labelledby="coupons-title">
+            <header class="panel-head">
+                <h2 id="coupons-title">Cupons</h2>
+                <p class="panel-meta" id="coupons-meta"></p>
+            </header>
+            <div class="table-wrap">
+                <table class="grid coupons-grid">
+                    <caption class="sr-only">Cupons ativos com código, loja, desconto, condição e validade.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col"><span>Código</span></th>
+                            <th scope="col"><span>Cupom</span></th>
+                            <th scope="col" class="num col-valid"><span>Validade</span></th>
+                            <th scope="col" class="col-tested"><span>Testado</span></th>
+                            <th scope="col" class="col-action"><span class="sr-only">Ação</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="coupons-body"></tbody>
+                </table>
+            </div>
+            <p class="empty" id="coupons-empty" hidden>Nenhum cupom com esse filtro.</p>
+        </section>
+    </main>
+
+    <footer class="statusbar">
+        <p>Histórico de preços ilustrativo neste protótipo. Preços e cupons conferidos no horário indicado e
+            sujeitos a alteração pela loja.</p>
+        <p>Alguns links são de afiliado: quando você compra por eles, a loja nos paga uma comissão e o preço para
+            você não muda. Amazon, Mercado Livre e AliExpress são marcas de seus respectivos titulares.</p>
+        <p class="statusbar-keys">&copy; 2026 AKVAPromo <span aria-hidden="true">·</span> <kbd>/</kbd> buscar
+            <span aria-hidden="true">·</span> <kbd>↑</kbd> <kbd>↓</kbd> trocar de oferta</p>
+    </footer>
+
+    <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <details class="style-switcher-menu">
+            <summary><span class="style-switcher-label">Estilo</span> <b>Terminal</b></summary>
+            <div class="style-switcher-list">
+                <a href="index.html">Original</a>
+                <a href="index-liquid.html">Liquid</a>
+                <a href="index-apple.html">Apple</a>
+                <a href="index-encarte.html">Encarte</a>
+                <a href="index-terminal.html" aria-current="page">Terminal</a>
+                <a href="index-blackfriday.html">Black Friday</a>
+                <a href="index-conversa.html">Conversa</a>
+                <a href="index-hud.html">HUD gamer</a>
+                <a href="index-brutalista.html">Brutalista</a>
+            </div>
+        </details>
+        <span class="style-switcher-divider" aria-hidden="true"></span>
+        <div class="style-switcher-themes" role="group" aria-label="Tema">
+            <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" /></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Tema claro" title="Claro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.75" /><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05" /></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Tema escuro" title="Escuro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <script src="assets/akva-data.js"></script>
+    <script src="assets/terminal.js?v=1"></script>
+</body>
+
+</html>

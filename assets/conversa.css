@@ -1,0 +1,548 @@
+/* ==========================================================================
+   AKVAPromo · protótipo "Canal em forma de conversa"
+   O site espelha o canal do WhatsApp, que é o centro do negócio: cada oferta
+   e cada cupom chega como uma mensagem, com horário. Cores da AKVA, sem
+   copiar o visual do WhatsApp.
+   ========================================================================== */
+
+:root {
+    color-scheme: dark;
+
+    --bg: #0B0B0C;
+    --pattern: rgba(255, 255, 255, 0.035);
+    --bubble: #1C1C1E;
+    --bubble-2: #26262A;
+    --text: #F2F2F2;
+    --text-2: #9A9AA0;
+    --line: rgba(255, 255, 255, 0.08);
+    --header: rgba(18, 18, 20, 0.86);
+    --red: #FF2B2B;
+    --red-strong: #E01E1E;
+    --red-hover: #C91616;
+    --brand-red: #FF2B2B;
+    --well: #FFFFFF;
+    --shadow: none;
+
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --col: 46rem;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --bg: #EFEFEF;
+    --pattern: rgba(0, 0, 0, 0.05);
+    --bubble: #FFFFFF;
+    --bubble-2: #F2F2F4;
+    --text: #111111;
+    --text-2: #5C5C63;
+    --line: rgba(0, 0, 0, 0.08);
+    --header: rgba(255, 255, 255, 0.86);
+    --red: #D91A1A;
+    --shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    /* Papel de parede discreto, como o fundo de uma conversa */
+    background:
+        radial-gradient(circle at 1px 1px, var(--pattern) 1px, transparent 1.5px) 0 0 / 18px 18px,
+        var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+}
+
+h1,
+p,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ol {
+    list-style: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--bg);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 160ms var(--ease-out), background-color 160ms ease;
+}
+
+.btn:active {
+    transform: scale(0.96);
+    transition-duration: 100ms;
+}
+
+.btn--red {
+    background: var(--red-strong);
+    color: #fff;
+}
+
+.btn--soft {
+    min-height: 2rem;
+    background: var(--text);
+    color: var(--bg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn--red:hover {
+        background: var(--red-hover);
+    }
+}
+
+.copy {
+    display: inline-grid;
+}
+
+.copy > span {
+    grid-area: 1 / 1;
+    transition: opacity 160ms ease;
+}
+
+.copy-done,
+.copy.is-copied .copy-idle {
+    opacity: 0;
+}
+
+.copy.is-copied .copy-done {
+    opacity: 1;
+}
+
+/* ---------- Cabeçalho do canal ---------- */
+
+.channel {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--line);
+    background: var(--header);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.channel-inner,
+.chips {
+    width: 100%;
+    max-width: calc(var(--col) + 2rem);
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.channel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.75rem;
+}
+
+.channel-id {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    text-decoration: none;
+}
+
+.avatar {
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.25rem;
+    border-radius: 50%;
+    background: #0B0B0C;
+}
+
+.channel-name {
+    display: block;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.channel-name span {
+    color: var(--brand-red);
+}
+
+.channel-sub {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-2);
+}
+
+.chips {
+    display: flex;
+    gap: 0.5rem;
+    padding-block: 0 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+    display: none;
+}
+
+.chip {
+    flex: none;
+    min-height: 2rem;
+    padding: 0 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bubble);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 160ms var(--ease-out);
+}
+
+.chip:active {
+    transform: scale(0.95);
+}
+
+.chip[aria-pressed="true"] {
+    border-color: var(--text);
+    background: var(--text);
+    color: var(--bg);
+}
+
+/* ---------- Mensagens ---------- */
+
+.feed {
+    width: 100%;
+    max-width: calc(var(--col) + 2rem);
+    margin-inline: auto;
+    padding: 1rem 1rem 1.5rem;
+}
+
+.messages {
+    display: grid;
+    gap: 0.5rem;
+}
+
+/* Aviso do canal e separador de dia: pílulas centralizadas */
+.notice,
+.day {
+    justify-self: center;
+    max-width: 30rem;
+    margin-block: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 8px;
+    background: var(--bubble);
+    box-shadow: var(--shadow);
+    font-size: 0.75rem;
+    text-align: center;
+    color: var(--text-2);
+}
+
+.day {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.msg {
+    display: flex;
+}
+
+.bubble {
+    position: relative;
+    max-width: min(30rem, 88%);
+    padding: 0.5rem 0.625rem 0.375rem;
+    border-radius: 4px 14px 14px 14px;
+    background: var(--bubble);
+    box-shadow: var(--shadow);
+}
+
+/* Bico da mensagem */
+.bubble::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 8px;
+    height: 12px;
+    background: var(--bubble);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.msg-media {
+    margin: -0.25rem -0.375rem 0.5rem;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--well);
+    aspect-ratio: 16 / 10;
+}
+
+.msg-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.msg-media[data-fit="contain"] img {
+    padding: 4%;
+    object-fit: contain;
+}
+
+.msg-text b {
+    font-weight: 700;
+}
+
+.msg-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.125rem 0.5rem;
+    margin-top: 0.25rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.msg-price strong {
+    font-size: 1.125rem;
+}
+
+.msg-price s {
+    font-size: 0.8125rem;
+    color: var(--text-2);
+}
+
+.off {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--red);
+}
+
+.msg-note {
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--text-2);
+}
+
+.msg-note .code {
+    color: var(--text);
+}
+
+.code-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.375rem 0.375rem 0.375rem 0.75rem;
+    border-radius: 10px;
+    background: var(--bubble-2);
+}
+
+.code {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.code-row .code {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: all;
+}
+
+.msg-meta {
+    margin-top: 0.125rem;
+    font-size: 0.6875rem;
+    text-align: right;
+    color: var(--text-2);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Botão de ação da mensagem, separado por um fio */
+.msg-action {
+    display: block;
+    margin: 0.375rem -0.625rem -0.375rem;
+    padding: 0.625rem;
+    border-top: 1px solid var(--line);
+    border-radius: 0 0 14px 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    color: var(--red);
+    transition: background-color 120ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .msg-action:hover {
+        background: var(--bubble-2);
+    }
+}
+
+.msg-action:active {
+    background: var(--bubble-2);
+}
+
+.empty {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--text-2);
+}
+
+/* ---------- Rodapé com a chamada ---------- */
+
+.composer {
+    border-top: 1px solid var(--line);
+    background: var(--header);
+}
+
+.composer-inner,
+.fineprint {
+    width: 100%;
+    max-width: calc(var(--col) + 2rem);
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.composer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+}
+
+.composer-inner p {
+    font-weight: 600;
+}
+
+.fineprint {
+    padding-block: 0 calc(5rem + env(safe-area-inset-bottom));
+    font-size: 0.75rem;
+    color: var(--text-2);
+}
+
+@media (max-width: 599px) {
+    .composer-inner {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+}
+
+/* ---------- Preferências do sistema ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .btn,
+    .chip {
+        transition: none;
+    }
+
+    .btn:active,
+    .chip:active {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --text-2: #C8C8CC;
+        --line: rgba(255, 255, 255, 0.3);
+    }
+
+    :root[data-theme="light"] {
+        --text-2: #3A3A40;
+        --line: rgba(0, 0, 0, 0.3);
+    }
+
+    .bubble {
+        outline: 1px solid var(--line);
+    }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>AKVAPromo · Folheto de ofertas</title>
+    <meta name="description"
+        content="As ofertas e os cupons da semana da Amazon, do Mercado Livre e do AliExpress, testados um a um.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" data-dark="#0b0b0b" data-light="#ffffff">
+    <script src="assets/theme.js?v=3"></script>
+
+    <link rel="icon" type="image/svg+xml" href="akva.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+
+    <!-- Archivo tem eixo de largura: condensada nos preços e títulos, normal no texto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+
+    <link rel="stylesheet" href="assets/encarte.css?v=1">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=4">
+</head>
+
+<body>
+    <a class="skip-link" href="#ofertas">Pular para as ofertas</a>
+
+    <header class="masthead">
+        <div class="container masthead-inner">
+            <a class="brand" href="index-encarte.html" aria-label="AKVAPromo, início">
+                <img src="akva.svg" alt="" width="44" height="44">
+                <span class="wordmark">AKVA<span>Promo</span></span>
+            </a>
+            <p class="edition">Folheto de ofertas <span aria-hidden="true">·</span> <time id="edition-range"></time></p>
+            <a class="btn btn--red masthead-cta" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I"
+                target="_blank" rel="noopener">
+                <span class="only-wide">Receber no WhatsApp</span>
+                <span class="only-narrow">WhatsApp</span>
+            </a>
+        </div>
+        <div class="ticker" aria-label="Cupons desta semana">
+            <ul class="ticker-track" id="ticker-track"></ul>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="sr-only">AKVAPromo: folheto de ofertas da semana</h1>
+
+        <section class="cover" id="cover" aria-labelledby="cover-title"></section>
+
+        <nav class="aisles" aria-label="Filtrar por loja">
+            <div class="container aisles-inner">
+                <span class="aisles-label" aria-hidden="true">Lojas</span>
+                <button class="aisle" type="button" data-store="all" aria-pressed="true">Todas</button>
+                <button class="aisle" type="button" data-store="amazon" aria-pressed="false">Amazon</button>
+                <button class="aisle" type="button" data-store="mercadolivre" aria-pressed="false">Mercado Livre</button>
+                <button class="aisle" type="button" data-store="aliexpress" aria-pressed="false">AliExpress</button>
+            </div>
+        </nav>
+
+        <section class="offers" id="ofertas" aria-labelledby="offers-title">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title display" id="offers-title">Ofertas da semana</h2>
+                    <p class="section-count" id="offers-count" aria-live="polite"></p>
+                </div>
+                <ul class="flyer" id="flyer"></ul>
+            </div>
+        </section>
+
+        <section class="clip" id="cupons" aria-labelledby="clip-title">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title display" id="clip-title">Cupons para recortar</h2>
+                    <p class="section-sub">Copie o código e cole no carrinho da loja antes de pagar.</p>
+                </div>
+                <ul class="coupons" id="coupons"></ul>
+            </div>
+        </section>
+
+        <section class="seals" aria-labelledby="seals-title">
+            <div class="container">
+                <h2 class="sr-only" id="seals-title">Como testamos</h2>
+                <ul class="seals-row">
+                    <li class="seal">
+                        <span class="seal-badge" aria-hidden="true">Testado</span>
+                        <div>
+                            <h3>Cupom testado antes de publicar</h3>
+                            <p>Cada cupom passa por um teste antes de entrar no folheto. Se não funcionar, não entra.</p>
+                        </div>
+                    </li>
+                    <li class="seal">
+                        <span class="seal-badge" aria-hidden="true">Link direto</span>
+                        <div>
+                            <h3>Direto para a loja</h3>
+                            <p>O botão leva para a página do produto na Amazon, no Mercado Livre ou no AliExpress.</p>
+                        </div>
+                    </li>
+                    <li class="seal">
+                        <span class="seal-badge" aria-hidden="true">Sem cadastro</span>
+                        <div>
+                            <h3>Sem criar conta</h3>
+                            <p>Não precisa de cadastro nem de e-mail para ver as ofertas e copiar os cupons.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cta-band" aria-labelledby="cta-title">
+            <div class="container cta-inner">
+                <div>
+                    <h2 class="display" id="cta-title">Receba as ofertas no WhatsApp</h2>
+                    <p>Cada cupom chega no canal assim que é testado.</p>
+                </div>
+                <a class="btn btn--white btn--xl" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I"
+                    target="_blank" rel="noopener">Entrar no canal</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fineprint">
+        <div class="container">
+            <p>Imagens meramente ilustrativas. Preços e cupons conferidos no horário indicado em cada oferta e
+                sujeitos a alteração pela loja a qualquer momento.</p>
+            <p>Alguns links são de afiliado: quando você compra por eles, a loja nos paga uma comissão e o preço para
+                você não muda. Amazon, Mercado Livre e AliExpress são marcas de seus respectivos titulares.</p>
+            <p class="fineprint-brand">&copy; 2026 AKVAPromo</p>
+        </div>
+    </footer>
+
+    <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <details class="style-switcher-menu">
+            <summary><span class="style-switcher-label">Estilo</span> <b>Encarte</b></summary>
+            <div class="style-switcher-list">
+                <a href="index.html">Original</a>
+                <a href="index-liquid.html">Liquid</a>
+                <a href="index-apple.html">Apple</a>
+                <a href="index-encarte.html" aria-current="page">Encarte</a>
+                <a href="index-terminal.html">Terminal</a>
+                <a href="index-blackfriday.html">Black Friday</a>
+                <a href="index-conversa.html">Conversa</a>
+                <a href="index-hud.html">HUD gamer</a>
+                <a href="index-brutalista.html">Brutalista</a>
+            </div>
+        </details>
+        <span class="style-switcher-divider" aria-hidden="true"></span>
+        <div class="style-switcher-themes" role="group" aria-label="Tema">
+            <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" /></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Tema claro" title="Claro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.75" /><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05" /></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Tema escuro" title="Escuro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <script src="assets/akva-data.js"></script>
+    <script src="assets/encarte.js?v=1"></script>
+</body>
+
+</html>

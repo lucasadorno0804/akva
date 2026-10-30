@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>AKVAPromo · Canal de ofertas</title>
+    <meta name="description"
+        content="As ofertas e os cupons da Amazon, do Mercado Livre e do AliExpress no formato do canal: cada novidade chega como uma mensagem.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#121214" data-dark="#121214" data-light="#ffffff">
+    <script src="assets/theme.js?v=3"></script>
+
+    <link rel="icon" type="image/svg+xml" href="akva.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="assets/conversa.css?v=1">
+    <link rel="stylesheet" href="assets/style-switcher.css?v=4">
+</head>
+
+<body>
+    <a class="skip-link" href="#feed">Pular para as mensagens</a>
+
+    <header class="channel">
+        <div class="channel-inner">
+            <a class="channel-id" href="index-conversa.html" aria-label="AKVAPromo, canal de ofertas, início">
+                <img class="avatar" src="akva.svg" alt="" width="44" height="44">
+                <span>
+                    <span class="channel-name">AKVA<span>Promo</span></span>
+                    <span class="channel-sub">Canal de ofertas · cupons testados</span>
+                </span>
+            </a>
+            <a class="btn btn--red" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                rel="noopener">Seguir</a>
+        </div>
+        <nav class="chips" id="chips" aria-label="Filtrar por loja"></nav>
+    </header>
+
+    <main class="feed" id="feed" aria-label="Mensagens do canal">
+        <h1 class="sr-only">AKVAPromo: ofertas e cupons em formato de conversa</h1>
+        <ol class="messages" id="messages"></ol>
+        <p class="empty" id="empty" hidden>Nenhuma mensagem dessa loja hoje.</p>
+    </main>
+
+    <footer class="composer">
+        <div class="composer-inner">
+            <p>Receba cada mensagem no seu WhatsApp, assim que o cupom for testado.</p>
+            <a class="btn btn--red" href="https://whatsapp.com/channel/0029VbCRNttKrWQx7WZS3R0I" target="_blank"
+                rel="noopener">Entrar no canal</a>
+        </div>
+        <p class="fineprint">Preços conferidos no horário de cada mensagem e sujeitos a alteração. Alguns links são de
+            afiliado: a loja nos paga uma comissão e o preço para você não muda. &copy; 2026 AKVAPromo.</p>
+    </footer>
+
+    <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+    <nav class="style-switcher" aria-label="Versões do protótipo">
+        <details class="style-switcher-menu">
+            <summary><span class="style-switcher-label">Estilo</span> <b>Conversa</b></summary>
+            <div class="style-switcher-list">
+                <a href="index.html">Original</a>
+                <a href="index-liquid.html">Liquid</a>
+                <a href="index-apple.html">Apple</a>
+                <a href="index-encarte.html">Encarte</a>
+                <a href="index-terminal.html">Terminal</a>
+                <a href="index-blackfriday.html">Black Friday</a>
+                <a href="index-conversa.html" aria-current="page">Conversa</a>
+                <a href="index-hud.html">HUD gamer</a>
+                <a href="index-brutalista.html">Brutalista</a>
+            </div>
+        </details>
+        <span class="style-switcher-divider" aria-hidden="true"></span>
+        <div class="style-switcher-themes" role="group" aria-label="Tema">
+            <button type="button" data-theme-option="auto" aria-pressed="false" aria-label="Tema automático, segue o sistema" title="Automático (segue o sistema)">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" /><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" /></svg>
+            </button>
+            <button type="button" data-theme-option="light" aria-pressed="false" aria-label="Tema claro" title="Claro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.75" /><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05" /></svg>
+            </button>
+            <button type="button" data-theme-option="dark" aria-pressed="false" aria-label="Tema escuro" title="Escuro">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <script src="assets/akva-data.js"></script>
+    <script src="assets/proto-kit.js?v=1"></script>
+    <script src="assets/conversa.js?v=1"></script>
+</body>
+
+</html>

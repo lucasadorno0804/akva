@@ -1,0 +1,1154 @@
+/* ==========================================================================
+   AKVAPromo · protótipo "Encarte"
+   O folheto de oferta do varejo brasileiro, bem-acabado: preço grande com os
+   centavos no alto, selo de desconto, grade com fios pretos, cupons para
+   recortar e as letras miúdas no rodapé. Mesmas cores e logo das outras
+   versões; papel branco no tema claro e folheto noturno no escuro.
+   ========================================================================== */
+
+:root {
+    color-scheme: light;
+
+    --paper: #FFFFFF;
+    --paper-2: #F4F4F2;
+    --ink: #111111;
+    --ink-2: #4D4D4D;
+    --rule: #111111;
+    --red: #E01E1E;       /* superfícies vermelhas com texto branco (contraste AA) */
+    --red-hover: #C91616;
+    --red-ink: #D91A1A;   /* texto vermelho sobre o papel */
+    --brand-red: #FF2B2B; /* logo */
+    --band: #111111;
+    --band-ink: #FFFFFF;
+    --chip: #111111;
+    --chip-ink: #FFFFFF;
+    --well: #FFFFFF;
+
+    --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --max: 76rem;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+    /* Selo estourado de 24 pontas */
+    --burst: polygon(50% 0%, 55.4% 9.4%, 62.9% 1.7%, 65.7% 12.1%, 75% 6.7%, 75% 17.5%, 85.4% 14.6%, 82.5% 25%, 93.3% 25%, 87.9% 34.3%, 98.3% 37.1%, 90.6% 44.6%, 100% 50%, 90.6% 55.4%, 98.3% 62.9%, 87.9% 65.7%, 93.3% 75%, 82.5% 75%, 85.4% 85.4%, 75% 82.5%, 75% 93.3%, 65.7% 87.9%, 62.9% 98.3%, 55.4% 90.6%, 50% 100%, 44.6% 90.6%, 37.1% 98.3%, 34.3% 87.9%, 25% 93.3%, 25% 82.5%, 14.6% 85.4%, 17.5% 75%, 6.7% 75%, 12.1% 65.7%, 1.7% 62.9%, 9.4% 55.4%, 0% 50%, 9.4% 44.6%, 1.7% 37.1%, 12.1% 34.3%, 6.7% 25%, 17.5% 25%, 14.6% 14.6%, 25% 17.5%, 25% 6.7%, 34.3% 12.1%, 37.1% 1.7%, 44.6% 9.4%);
+}
+
+/* Folheto noturno: os fios e as faixas se invertem, o vermelho continua */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --paper: #0B0B0B;
+    --paper-2: #161616;
+    --ink: #F5F5F5;
+    --ink-2: #A6A6A6;
+    --rule: rgba(245, 245, 245, 0.9);
+    --red-ink: #FF3B3B;
+    --band: #F5F5F5;
+    --band-ink: #0B0B0B;
+    --chip: #F5F5F5;
+    --chip-ink: #0B0B0B;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--paper);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--red);
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: calc(var(--max) + var(--gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 800;
+    text-decoration: none;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+.only-narrow {
+    display: none;
+}
+
+/* Títulos de encarte: condensada, preta, em caixa alta */
+.display {
+    font-weight: 900;
+    font-stretch: 62%;
+    line-height: 0.9;
+    text-transform: uppercase;
+}
+
+/* ---------- Botões ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0 1.25rem;
+    border: 0;
+    border-radius: 4px;
+    font-size: 1.125rem;
+    font-weight: 900;
+    font-stretch: 70%;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 160ms var(--ease-out), background-color 160ms ease, opacity 160ms ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
+    transition-duration: 100ms;
+}
+
+.btn--red {
+    background: var(--red);
+    color: #fff;
+}
+
+.btn--ink {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.btn--white {
+    background: #fff;
+    color: #111;
+}
+
+.btn--xl {
+    min-height: 3.5rem;
+    padding: 0 2rem;
+    font-size: 1.375rem;
+}
+
+.btn--sm {
+    min-height: 2.625rem;
+    padding: 0 0.875rem;
+    font-size: 1rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn--red:hover {
+        background: var(--red-hover);
+    }
+
+    .btn--ink:hover,
+    .btn--white:hover {
+        opacity: 0.86;
+    }
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.masthead {
+    border-bottom: 4px solid var(--rule);
+}
+
+.masthead-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 5rem;
+}
+
+.brand {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.brand img {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.wordmark {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.wordmark span {
+    color: var(--brand-red);
+}
+
+.edition {
+    flex: 1;
+    font-size: 1.375rem;
+    font-weight: 800;
+    font-stretch: 62%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.edition span {
+    color: var(--red-ink);
+}
+
+/* Faixa de cupons correndo, como no rodapé de TV de varejo */
+.ticker {
+    overflow: hidden;
+    background: var(--red);
+    color: #fff;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker var(--ticker-duration, 60s) linear infinite;
+}
+
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+    animation-play-state: paused;
+}
+
+.ticker li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: 70%;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ticker li::after {
+    content: "★";
+    margin-left: 1rem;
+    font-size: 0.75rem;
+    opacity: 0.75;
+}
+
+.ticker-code {
+    padding: 0.125rem 0.5rem;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.25);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+@keyframes ticker {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ---------- Etiqueta de preço e selo ---------- */
+
+/* Etiqueta de pendurar: ponta, furo, "R$" pequeno e centavos no alto */
+.tag {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    margin-top: 0.375rem;
+    padding: 0.12em 0.32em 0.1em 0.72em;
+    background: var(--red);
+    color: #fff;
+    font-size: 2.25rem;
+    font-weight: 900;
+    font-stretch: 62%;
+    line-height: 1;
+    clip-path: polygon(0.42em 0, 100% 0, 100% 100%, 0.42em 100%, 0 50%);
+}
+
+.tag::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0.3em;
+    width: 0.16em;
+    height: 0.16em;
+    margin-top: -0.08em;
+    border-radius: 50%;
+    background: var(--hole, var(--paper));
+}
+
+.price-cur {
+    margin-top: 0.2em;
+    margin-right: 0.1em;
+    font-size: 0.42em;
+}
+
+.price-cents {
+    margin-top: 0.1em;
+    font-size: 0.46em;
+}
+
+.tag--xl {
+    font-size: clamp(3.5rem, 2.4rem + 4vw, 6rem);
+}
+
+.burst {
+    display: grid;
+    place-items: center;
+    width: 4.25rem;
+    aspect-ratio: 1;
+    background: var(--red);
+    color: #fff;
+    font-size: 1.375rem;
+    font-weight: 900;
+    font-stretch: 62%;
+    line-height: 1;
+    clip-path: var(--burst);
+    transform: rotate(-10deg);
+    transition: transform 240ms var(--ease-out);
+}
+
+.burst--xl {
+    width: clamp(6.5rem, 5rem + 4vw, 9rem);
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+}
+
+/* ---------- Capa ---------- */
+
+.cover {
+    padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.cover-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.cover-kicker {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: var(--chip);
+    color: var(--chip-ink);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    font-stretch: 70%;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cover-title {
+    margin-top: 1rem;
+    font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);
+    text-wrap: balance;
+}
+
+.cover-blurb {
+    max-width: 32rem;
+    margin-top: 0.875rem;
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+}
+
+.cover-price {
+    margin-top: 1.5rem;
+}
+
+.was {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink-2);
+}
+
+.was s,
+.cell-was s {
+    text-decoration-thickness: 2px;
+}
+
+.cover-meta {
+    margin-top: 0.625rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+}
+
+.cover-copy > .btn {
+    margin-top: 1.5rem;
+}
+
+.cover-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    background: #000;
+    box-shadow: 0 0 0 2px var(--rule);
+}
+
+.cover-media img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.cover-media .burst {
+    position: absolute;
+    top: -1.25rem;
+    left: -1.25rem;
+}
+
+/* ---------- Corredores (filtro por loja) ---------- */
+
+.aisles {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--band);
+    color: var(--band-ink);
+}
+
+.aisles-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.aisles-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.aisles-label {
+    flex: none;
+    padding-right: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    font-stretch: 70%;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.aisle {
+    flex: none;
+    padding: 0.875rem 1rem;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-size: 1.375rem;
+    font-weight: 900;
+    font-stretch: 62%;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 120ms ease, transform 160ms var(--ease-out);
+}
+
+.aisle:active {
+    transform: scale(0.97);
+}
+
+.aisle[aria-pressed="true"] {
+    background: var(--red);
+    color: #fff;
+}
+
+.aisle:focus-visible {
+    outline-color: var(--band-ink);
+    outline-offset: -4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .aisle:hover:not([aria-pressed="true"]) {
+        background: rgba(128, 128, 128, 0.22);
+    }
+}
+
+/* ---------- Ofertas ---------- */
+
+.offers {
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem);
+}
+
+.section-count,
+.section-sub {
+    max-width: 32rem;
+    font-weight: 600;
+    color: var(--ink-2);
+}
+
+/* Grade de folheto: os fios só existem onde há oferta */
+.flyer {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    padding: 2px;
+}
+
+.cell {
+    --hole: var(--paper);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.25rem 1.125rem;
+    background: var(--paper);
+    box-shadow: 0 0 0 2px var(--rule);
+    transition: background-color 160ms ease;
+}
+
+.cell .burst {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+}
+
+.cell-media {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--well);
+    transition: transform 160ms var(--ease-out);
+}
+
+.cell-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cell-media[data-fit="contain"] img {
+    padding: 6%;
+    object-fit: contain;
+}
+
+.cell:active .cell-media {
+    transform: scale(0.985);
+    transition-duration: 100ms;
+}
+
+.cell-store {
+    margin-top: 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+}
+
+.cell-title {
+    display: -webkit-box;
+    min-height: 2.5em;
+    margin-top: 0.25rem;
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.cell-was {
+    margin-top: 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-2);
+}
+
+.cell-coupon {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--chip);
+    color: var(--chip-ink);
+    font-size: 0.8125rem;
+    font-weight: 700;
+}
+
+.cell-coupon b {
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+}
+
+.cell-link {
+    margin-top: auto;
+    padding-top: 0.875rem;
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: 75%;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-transform: uppercase;
+    text-underline-offset: 0.2em;
+}
+
+/* A célula inteira é clicável, sem aninhar elementos interativos */
+.cell-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.cell-link:focus-visible {
+    outline: none;
+}
+
+.cell-link:focus-visible::after {
+    outline: 3px solid var(--ink);
+    outline-offset: -5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .cell:hover {
+        --hole: var(--paper-2);
+        background: var(--paper-2);
+    }
+
+    .cell:hover .burst {
+        transform: rotate(0deg) scale(1.06);
+    }
+
+    .cell:hover .cell-link {
+        color: var(--red-ink);
+    }
+}
+
+/* Entrada ao trocar de loja: curta, sem segurar o clique */
+.is-entering {
+    animation: enter 320ms var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+}
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+/* ---------- Cupons para recortar ---------- */
+
+.clip {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-block: 4px solid var(--rule);
+    background: var(--paper-2);
+}
+
+.coupons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem 1.5rem;
+}
+
+.coupon {
+    position: relative;
+    padding: 1.5rem 1.25rem 1.25rem;
+    border: 2px dashed var(--rule);
+    background: var(--paper);
+}
+
+/* A tesoura "corta" o tracejado de cima */
+.coupon-scissors {
+    position: absolute;
+    top: -0.85rem;
+    left: 1rem;
+    width: 2rem;
+    height: 1.5rem;
+    padding: 0 0.25rem;
+    background: var(--paper-2);
+    color: var(--ink);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.coupon-store {
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+}
+
+.coupon-value {
+    margin-top: 0.375rem;
+    font-size: clamp(2.5rem, 2rem + 1.6vw, 3.25rem);
+    color: var(--red-ink);
+}
+
+.coupon-cond {
+    margin-top: 0.375rem;
+    font-weight: 600;
+}
+
+.coupon-code-row {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: 1rem;
+}
+
+.coupon-code {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: all;
+}
+
+.coupon-meta {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+}
+
+.copy {
+    display: inline-grid;
+    flex: none;
+}
+
+.copy > span {
+    grid-area: 1 / 1;
+    transition: opacity 180ms ease;
+}
+
+.copy-done,
+.copy.is-copied .copy-idle {
+    opacity: 0;
+}
+
+.copy.is-copied .copy-done {
+    opacity: 1;
+}
+
+/* Carimbo: marca o cupom que você já copiou */
+.stamp {
+    position: absolute;
+    top: 1.25rem;
+    right: 1rem;
+    padding: 0.25rem 0.625rem;
+    border: 3px solid var(--red-ink);
+    border-radius: 4px;
+    color: var(--red-ink);
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-stretch: 62%;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: rotate(-12deg);
+    pointer-events: none;
+}
+
+.coupon.is-copied .stamp {
+    animation: stamp 420ms var(--ease-out) forwards;
+}
+
+@keyframes stamp {
+    0% {
+        opacity: 0;
+        transform: rotate(-12deg) scale(1.6);
+    }
+
+    60% {
+        opacity: 1;
+        transform: rotate(-12deg) scale(0.96);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(-12deg) scale(1);
+    }
+}
+
+/* ---------- Selos ---------- */
+
+.seals {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.seals-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.seal {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.seal-badge {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 6.5rem;
+    aspect-ratio: 1;
+    padding: 0.75rem;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: inset 0 0 0 5px var(--red), inset 0 0 0 7px #fff;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 900;
+    font-stretch: 62%;
+    line-height: 0.95;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(-6deg);
+}
+
+.seal h3 {
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.seal p {
+    margin-top: 0.25rem;
+    color: var(--ink-2);
+}
+
+/* ---------- Chamada do canal ---------- */
+
+.cta-band {
+    background: var(--red);
+    color: #fff;
+}
+
+.cta-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem 3rem;
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.cta-band h2 {
+    font-size: clamp(2.5rem, 1.6rem + 3.6vw, 5rem);
+    text-wrap: balance;
+}
+
+.cta-band p {
+    margin-top: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.cta-band .btn:focus-visible {
+    outline-color: #fff;
+}
+
+/* ---------- Letras miúdas ---------- */
+
+.fineprint {
+    padding-block: 1.5rem calc(5.5rem + env(safe-area-inset-bottom));
+    border-top: 4px solid var(--rule);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+}
+
+.fineprint p {
+    max-width: 60rem;
+}
+
+.fineprint p + p {
+    margin-top: 0.5rem;
+}
+
+.fineprint-brand {
+    font-weight: 800;
+    color: var(--ink);
+}
+
+/* ---------- Telas menores ---------- */
+
+@media (max-width: 1023px) {
+    .flyer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .coupons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .seals-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .masthead-inner {
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        min-height: 0;
+        padding-block: 0.75rem;
+    }
+
+    .masthead-cta {
+        margin-left: auto;
+    }
+
+    .edition {
+        flex-basis: 100%;
+        order: 3;
+        font-size: 1.125rem;
+        text-align: left;
+    }
+
+    .cover-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cover-media {
+        order: -1;
+    }
+
+    .cover-media .burst {
+        top: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .coupons {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cta-inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 599px) {
+    .only-wide {
+        display: none;
+    }
+
+    .only-narrow {
+        display: inline;
+    }
+
+    .wordmark {
+        font-size: 1.25rem;
+    }
+
+    .brand img {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .cell {
+        padding: 0.875rem 0.75rem;
+    }
+
+    .cell .burst {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 3.25rem;
+        font-size: 1.0625rem;
+    }
+
+    .cell-title {
+        font-size: 0.875rem;
+    }
+
+    .cell .tag {
+        font-size: 1.75rem;
+    }
+
+    .cell-coupon {
+        font-size: 0.75rem;
+    }
+
+    .cell-link {
+        font-size: 0.9375rem;
+    }
+
+    .aisle {
+        padding: 0.875rem 0.75rem;
+        font-size: 1.25rem;
+    }
+}
+
+/* ---------- Preferências do sistema ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .ticker {
+        overflow-x: auto;
+    }
+
+    .ticker-track {
+        animation: none;
+    }
+
+    .burst,
+    .cell-media,
+    .btn,
+    .aisle {
+        transition: none;
+        transform: none !important;
+    }
+
+    .burst {
+        transform: rotate(-10deg) !important;
+    }
+
+    .is-entering {
+        animation-name: fade;
+    }
+
+    .coupon.is-copied .stamp {
+        animation: fade 200ms ease forwards;
+        transform: rotate(-12deg);
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --ink-2: #2E2E2E;
+    }
+
+    :root[data-theme="dark"] {
+        --ink-2: #D0D0D0;
+    }
+}
