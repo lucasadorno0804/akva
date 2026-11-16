@@ -17,7 +17,17 @@ window.AKVAKit = (() => {
     const storeOf = (id) => DATA.stores[id];
     const atStore = (store) => `n${store.article} ${store.name}`; // "na Amazon", "no Mercado Livre"
     const discount = (deal) => Math.round((1 - deal.price / deal.was) * 100);
-    const dealUrl = (deal) => deal.url || storeOf(deal.store).url;
+    const dealUrl = (deal) => {
+        let url = deal.url || storeOf(deal.store).url;
+        if (deal.store === 'amazon') {
+            const tag = storeOf('amazon').affiliateTag;
+            if (tag && /amazon\.com(\.br)?/i.test(url) && !url.includes('tag=')) {
+                const sep = url.includes('?') ? '&' : '?';
+                url = `${url}${sep}tag=${encodeURIComponent(tag)}`;
+            }
+        }
+        return url;
+    };
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
     // "3.719" e "07" separados, para preços com os centavos em destaque

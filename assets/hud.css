@@ -440,23 +440,99 @@ button {
     --tc: var(--t4);
 }
 
-/* ---------- Abas de loja ---------- */
+/* ---------- Painel de Filtros e Busca HUD ---------- */
+
+.hud-filter-panel {
+    margin-top: 1.5rem;
+}
+
+.hud-filter-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+}
+
+.hud-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--frame);
+    padding: 0.375rem 0.625rem 0.375rem 0.875rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.hud-search-btn {
+    padding: 0 1rem;
+    min-height: 2.25rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    border-radius: 0;
+}
+
+.hud-search-bar:focus-within {
+    border-color: var(--red);
+    box-shadow: 0 0 12px var(--red-soft);
+}
+
+.hud-search-icon {
+    font-weight: 700;
+    color: var(--red);
+    font-family: var(--font-mono);
+    user-select: none;
+}
+
+.hud-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.hud-search-input::placeholder {
+    color: var(--text-2);
+}
+
+.hud-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.875rem;
+}
+
+.hud-filter-title {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    min-width: 95px;
+}
+
+/* ---------- Abas de filtro ---------- */
 
 .tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1.75rem;
 }
 
 .tab {
-    min-height: 2.5rem;
-    padding: 0 1rem;
+    min-height: 2.25rem;
+    padding: 0 0.875rem;
     border: 1px solid var(--frame);
     background: var(--panel);
+    font-family: var(--font);
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    color: var(--text);
     cursor: pointer;
     transition: border-color 120ms ease, background-color 120ms ease, transform 160ms var(--ease-out);
 }
@@ -469,6 +545,10 @@ button {
 .tab::after {
     content: " ]";
     color: var(--text-2);
+}
+
+.tab:hover {
+    border-color: var(--text-2);
 }
 
 .tab:active {
@@ -484,6 +564,130 @@ button {
 .tab[aria-pressed="true"]::before,
 .tab[aria-pressed="true"]::after {
     color: var(--red);
+}
+
+.item-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+}
+
+.item-cat {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--text-2);
+    background: var(--panel-2);
+    padding: 0.15rem 0.4rem;
+    border: 1px solid var(--frame);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hud-empty {
+    grid-column: 1 / -1;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    border: 1px dashed var(--frame);
+    background: var(--panel);
+}
+
+.hud-empty strong {
+    display: block;
+    color: var(--red);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font);
+}
+
+/* ---------- Card Radar Tático Amazon ---------- */
+
+.item--radar {
+    border-color: var(--red);
+    background: linear-gradient(180deg, var(--panel) 0%, rgba(255, 43, 43, 0.08) 100%);
+}
+
+.radar-card-inner {
+    border: 1px solid var(--red);
+    box-shadow: inset 0 0 15px rgba(255, 43, 43, 0.1);
+}
+
+.radar-visual {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    border: 1px solid var(--frame);
+    margin: 0.75rem 0;
+}
+
+.radar-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255, 43, 43, 0.08) 1px, transparent 1px) 0 0 / 20px 20px,
+        linear-gradient(90deg, rgba(255, 43, 43, 0.08) 1px, transparent 1px) 0 0 / 20px 20px;
+}
+
+.radar-circle-outer {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 43, 43, 0.5);
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 43, 43, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radar-circle-outer::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 43, 43, 0.4);
+}
+
+.radar-circle-outer::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 10px var(--red);
+}
+
+.radar-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 70%, rgba(255, 43, 43, 0.6) 100%);
+    animation: radar-sweep 2.5s linear infinite;
+}
+
+@keyframes radar-sweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.radar-desc {
+    font-size: 0.875rem;
+    color: var(--text-2);
+    margin: 0.5rem 0 1rem;
+    line-height: 1.4;
+}
+
+.radar-term {
+    color: var(--red);
+    font-weight: 700;
 }
 
 /* ---------- Seções ---------- */
