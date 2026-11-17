@@ -110,7 +110,26 @@
     /* ---------- Drops de Cupons ---------- */
 
     const dropList = $('#drop-list');
-    dropList.innerHTML = coupons.map((coupon) => {
+    const centralCard = `
+        <li class="drop frame drop--central" data-store="amazon" data-category="all">
+            <div class="frame-inner drop-inner" style="border-color: var(--red);">
+                <div class="drop-head">
+                    <span style="color: var(--red); font-weight: 700;">[ 🔥 CENTRAL OFICIAL ]</span>
+                    <span>Atualizado 24h</span>
+                </div>
+                <p class="drop-value">Até 50% OFF</p>
+                <p class="drop-cond">Acesse centenas de cupons automáticos da Amazon em Games, Hardware e Periféricos.</p>
+                <div class="drop-actions" style="margin-top: 0.75rem;">
+                    <a class="btn btn--red btn--block" href="https://www.amazon.com.br/cupons?tag=${AMAZON_TAG}" target="_blank" rel="sponsored noopener">
+                        Ver Cupons na Amazon &gt;&gt;
+                    </a>
+                </div>
+                <p class="drop-meta">Ativação em 1 clique na Amazon</p>
+            </div>
+        </li>
+    `;
+
+    dropList.innerHTML = centralCard + coupons.map((coupon) => {
         const code = escapeHTML(coupon.code);
 
         return `
@@ -192,7 +211,7 @@
             const cat = item.dataset.category;
             const text = item.textContent.toLowerCase();
 
-            const matchCat = activeCategory === 'all' || cat === activeCategory;
+            const matchCat = activeCategory === 'all' || cat === 'all' || cat === activeCategory;
             const matchStore = activeStore === 'all' || store === activeStore;
             const matchQuery = !qLower || text.includes(qLower);
 
@@ -206,7 +225,7 @@
             const cat = drop.dataset.category;
             const text = drop.textContent.toLowerCase();
 
-            const matchCat = activeCategory === 'all' || cat === activeCategory;
+            const matchCat = activeCategory === 'all' || cat === 'all' || cat === activeCategory;
             const matchStore = activeStore === 'all' || store === activeStore;
             const matchQuery = !qLower || text.includes(qLower);
 
