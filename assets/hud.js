@@ -15,19 +15,21 @@
     const tierOf = (off) => (off >= 50 ? 4 : off >= 35 ? 3 : off >= 20 ? 2 : 1);
     const tierName = ['', 'Comum', 'Raro', 'Épico', 'Lendário'];
 
-    /* ---------- Placar ---------- */
+    /* ---------- Placar e Dados (Somente Amazon) ---------- */
 
-    const offs = DATA.deals.map(discount);
+    const deals = DATA.deals.filter((deal) => deal.store === 'amazon').sort((a, b) => discount(b) - discount(a));
+    const coupons = DATA.coupons.filter((c) => c.store === 'amazon');
+
+    const offs = deals.map(discount);
     const legendary = offs.filter((off) => tierOf(off) === 4).length;
     $('#stats').innerHTML = `
-        <div><dt>Itens</dt><dd>${DATA.deals.length}</dd></div>
-        <div><dt>Drops</dt><dd>${DATA.coupons.length}</dd></div>
+        <div><dt>Itens</dt><dd>${deals.length}</dd></div>
+        <div><dt>Drops</dt><dd>${coupons.length}</dd></div>
         <div><dt>Maior desconto</dt><dd>−${Math.max(...offs)}%</dd></div>
         <div><dt>Lendários</dt><dd>${legendary}</dd></div>`;
 
     /* ---------- Itens da vitrine ---------- */
 
-    const deals = [...DATA.deals].sort((a, b) => discount(b) - discount(a));
     const itemsList = $('#items');
     itemsList.innerHTML = deals.map((deal) => {
         const store = storeOf(deal.store);
@@ -108,7 +110,7 @@
     /* ---------- Drops de Cupons ---------- */
 
     const dropList = $('#drop-list');
-    dropList.innerHTML = DATA.coupons.map((coupon) => {
+    dropList.innerHTML = coupons.map((coupon) => {
         const code = escapeHTML(coupon.code);
 
         return `
